@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import theme from './theme';
+import firebaseConfig from './firebase.config';
+import { initializeApp } from 'firebase/app';
+import { getDatabase, get, ref } from 'firebase/database';
+import AppRouter from './routing/Router';
+import { UserProvider } from './context/UserContext';
+import { SnackbarProvider } from 'notistack';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline>
+        <SnackbarProvider>
+          <UserProvider>
+            <AppRouter />
+          </UserProvider>
+        </SnackbarProvider>
+      </CssBaseline>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
